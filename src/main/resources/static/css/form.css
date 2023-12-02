@@ -1,0 +1,67 @@
+/* Общие стили для body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f7f7f7;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.user-info {
+    position: absolute;
+    top: 10px; /* регулируйте значение top, чтобы установить расстояние от верхнего края */
+    right: 10px; /* регулируйте значение right, чтобы установить расстояние от правого края */
+    background-color: #fff; /* цвет фона блока */
+    padding: 10px;
+    border: 1px solid #ccc; /* опционально: границы блока */
+    border-radius: 4px;
+}
+
+/* Стили для ролей пользователя */
+.user-role {
+    /* Ваши стили для ролей пользователя */
+}
+
+/* Стили для контента */
+.content {
+    /* Ваши стили для области контента */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Стили для формы и элементов формы */
+form {
+    margin-top: 20px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}

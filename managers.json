@@ -1,0 +1,100 @@
+[ {
+  "id" : 3,
+  "firstName" : "SDs",
+  "secondName" : "SDSasdda",
+  "code" : "000003",
+  "dateStartWork" : [ 2023, 12, 1 ],
+  "status" : "ACTIVE",
+  "isVIP" : false,
+  "vip" : false
+}, {
+  "id" : 1,
+  "manager" : {
+    "id" : 3,
+    "firstName" : "SDs",
+    "secondName" : "SDSasdda",
+    "code" : "000003",
+    "dateStartWork" : [ 2023, 12, 1 ],
+    "status" : "ACTIVE",
+    "isVIP" : false,
+    "vip" : false
+  },
+  "number" : "+380999999999",
+  "active" : true,
+  "callTimeSum" : [ 8, 20 ]
+}, {
+  "id" : 2,
+  "manager" : {
+    "id" : 3,
+    "firstName" : "SDs",
+    "secondName" : "SDSasdda",
+    "code" : "000003",
+    "dateStartWork" : [ 2023, 12, 1 ],
+    "status" : "ACTIVE",
+    "isVIP" : false,
+    "vip" : false
+  },
+  "number" : "+380234444444",
+  "active" : false,
+  "callTimeSum" : [ 5, 26 ]
+}, {
+  "id" : 3,
+  "manager" : {
+    "id" : 3,
+    "firstName" : "SDs",
+    "secondName" : "SDSasdda",
+    "code" : "000003",
+    "dateStartWork" : [ 2023, 12, 1 ],
+    "status" : "ACTIVE",
+    "isVIP" : false,
+    "vip" : false
+  },
+  "number" : "+380345345345",
+  "active" : true,
+  "callTimeSum" : [ 1, 38 ]
+}, {
+  "id" : 5,
+  "firstName" : "Sho",
+  "secondName" : "Sho",
+  "code" : "000000",
+  "dateStartWork" : [ 2023, 12, 1 ],
+  "status" : "ACTIVE",
+  "isVIP" : false,
+  "vip" : false
+}, {
+  "id" : 12,
+  "firstName" : "Еуук",
+  "secondName" : "Укваы",
+  "code" : "100000",
+  "dateStartWork" : [ 2023, 12, 1 ],
+  "status" : "ACTIVE",
+  "isVIP" : false,
+  "vip" : false
+}, {
+  "id" : 16,
+  "firstName" : "Sad",
+  "secondName" : "asdasd",
+  "code" : "430000",
+  "dateStartWork" : [ 2023, 12, 1 ],
+  "status" : "ACTIVE",
+  "isVIP" : false,
+  "vip" : false
+}, {
+  "id" : 17,
+  "firstName" : "DsDfs",
+  "secondName" : "sdfsdf",
+  "code" : "0ere00",
+  "dateStartWork" : [ 2023, 12, 2 ],
+  "status" : "ACTIVE",
+  "isVIP" : true,
+  "vip" : true
+}, {
+  "id" : 18,
+  "firstName" : "DSD",
+  "secondName" : "sdfsdf",
+  "code" : "500000",
+  "dateStartWork" : [ 2023, 12, 2 ],
+  "status" : "VACATION",
+  "isVIP" : true,
+  "vip" : true
+} ]

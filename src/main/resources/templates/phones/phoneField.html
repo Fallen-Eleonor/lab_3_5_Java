@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titlePhone}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="container">
+    <div class="d-flex" sec:authorize="isAuthenticated()">
+        <p>Username:
+            <span sec:authentication="name"></span>
+            <span>|</span>
+        </p>
+        <p class="ml-2">User role(s):
+            <span th:each="authority : ${#authentication.principal.getAuthorities()}">
+                <span th:text="${authority.authority}"></span>
+        </p>
+    </div>
+    <div class="content mt-4">
+        <h1 th:text="${titlePhone}" class="mb-4"></h1>
+        <p style="color: red"><span th:text="${errorString}"></span></p>
+        <form th:action="@{/phones/save/{id} (id=${phone.id})}" th:object="${phone}"
+              method="POST">
+            <input required hidden type="text" name="id" th:field="*{id}"/>
+            <div class="form-group">
+                <label for="number">Number</label>
+                <input type="text" class="form-control" name="number" id="number"
+                       th:value="${phone.number}" required pattern="\+[0-9]{12}" minlength="13" maxlength="13"/>
+            </div>
+            <div class="form-group">
+                <label for="active">Active</label>
+                <select class="form-control" name="active" id="active" th:value="${phone.active}">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="callTimeSum">Call Time Sum</label>
+                <input type="text" class="form-control" name="callTimeSum" id="callTimeSum"
+                       th:value="${phone.callTimeSum}" required pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+                       oninput="validateTimeInput(this)"/>
+                <small>Format: HH:mm (e.g., 05:30)</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" accesskey="d">Save</button>
+        </form>
+        <form action="/phones" method="GET" class="mt-3">
+            <input type="hidden" name="id" th:value="${phone.getManager().getId()}"/>
+            <button type="submit" class="btn btn-secondary" accesskey="d">Back</button>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/phone-searcher.js}"></script>
+</body>
+</html>

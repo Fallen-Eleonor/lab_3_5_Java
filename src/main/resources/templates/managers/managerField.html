@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titleManager}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/form.css}"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="d-flex" sec:authorize="isAuthenticated()">
+        <p>Username:
+            <span sec:authentication="name"></span>
+            <span>|</span>
+        </p>
+        <p class="ml-2">User role(s):
+            <span th:each="authority : ${#authentication.principal.getAuthorities()}">
+                <span th:text="${authority.authority}"></span>
+        </p>
+    </div>
+    <div class="container-fluid">
+        <h1 th:text="${titleManager}"></h1>
+        <p style="color: red"><span th:text="${errorString}"></span></p>
+        <form th:action="@{/managers/save/{id} (id=${manager.id})}" th:object="${manager}" method="POST">
+            <input required hidden type="text" name="id" th:field="*{id}"/>`
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" name="firstName" id="firstName" th:value="${manager.firstName}"
+                       pattern="[A-Z][a-zA-Z]*" required/>
+            </div>
+            <div class="form-group">
+                <label for="secondName">Second Name</label>
+                <input type="text" class="form-control" name="secondName" id="secondName"
+                       pattern="[A-Z][a-zA-Z]*" th:value="${manager.secondName}" required/>
+            </div>
+            <div class="form-group">
+                <label for="code">Code</label>
+                <input type="text" class="form-control" name="code" id="code" pattern="[0-9]{6}" th:value="${manager.code}" required/>
+            </div>
+            <div class="form-group">
+                <label for="dateStartWork">Start Work Date</label>
+                <input type="date" class="form-control" name="dateStartWork" id="dateStartWork"
+                       th:value="${manager.dateStartWork}" required/>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select class="form-control" name="status" id="status" th:value="${manager.status}" required>
+                    <option value="ACTIVE">Active</option>
+                    <option value="WEEKEND">Weekend</option>
+                    <option value="VACATION">Vacation</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="isVIP">VIP</label>
+                <select class="form-control" name="isVIP" id="isVIP" th:field="*{isVIP}" required>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+        <a href="/managers" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+</html>

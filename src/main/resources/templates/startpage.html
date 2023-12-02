@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Start (WEB LAB#3)</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div>
+    <div class="d-flex" sec:authorize="isAuthenticated()">
+        <p>Username:
+            <span sec:authentication="name"></span>
+            <span>|</span>
+        </p>
+        <p class="ml-2">User role(s):
+            <span th:each="authority : ${#authentication.principal.getAuthorities()}">
+                <span th:text="${authority.authority}"></span>
+        </p>
+    </div>
+    <div class="text-center">
+        <div>
+            <h1 class="text-center">Spring Start (WEB LAB#3-5)</h1>
+            <br/>
+            <div class="d-flex align-items-center justify-content-center">
+                <a href="/managers" class="btn btn-primary">Show Managers List</a>
+                <a href="/logout" class="ml-2 btn btn-danger">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

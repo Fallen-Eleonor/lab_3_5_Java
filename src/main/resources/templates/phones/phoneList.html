@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Phones list (WEB Lab#3)</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body class="bg-light">
+<div class="container">
+    <div class="d-flex" sec:authorize="isAuthenticated()">
+        <p>Username:
+            <span sec:authentication="name"></span>
+            <span>|</span>
+        </p>
+        <p class="ml-2">User role(s):
+            <span th:each="authority : ${#authentication.principal.getAuthorities()}">
+                <span th:text="${authority.authority}"></span>
+        </p>
+    </div>
+    <h1>Phones list (WEB Lab#3)</h1>
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="">
+            <form sec:authorize="hasAuthority('ADMIN')" action="phones/new" method="GET">
+                <button type="submit" class="btn btn-primary" accesskey="d">Add Phone</button>
+            </form>
+        </div>
+        <div class="d-flex align-items-center">
+            <span><b>Filter by active status:</b></span>
+            <select class="ml-2 form-control" id="ActiveFilter" name="ActiveFilter"
+                    onchange="filterByActive()">
+                <option value="all">all</option>
+            </select>
+        </div>
+        <div class="d-flex align-items-center">
+            <b><label for="search-phone">Find by phone:</label></b>
+            <input type="text" class="ml-2 search-Text"
+                   placeholder="Start typing:" id="search-phone"
+                   onkeyup="searchByPhone()">
+        </div>
+        <div>
+            <form action="/phones" method="get" th:if="${not #lists.isEmpty(phones)}">
+                <input type="hidden" name="id" th:value="${phones.get(0).getManager().getId()}"/>
+                <button type="submit" class="btn btn-primary" accesskey="x">Reset</button>
+            </form>
+        </div>
+    </div>
+    <table id="phones-table" class="mt-3 table table-striped">
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Active</th>
+            <th>Call Time Sum</th>
+            <th colspan="2" sec:authorize="hasAuthority('ADMIN')">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="phone: ${phones}">
+            <td th:text="${phone.number}"></td>
+            <td th:text="${phone.active}"></td>
+            <td th:text="${phone.callTimeSum}"></td>
+            <td sec:authorize="hasAuthority('ADMIN')">
+                <form class="d-flex justify-content-center" th:action="@{/phones/edit/{id} (id=${phone.id})}">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </td>
+            <td sec:authorize="hasAuthority('ADMIN')">
+                <form class="d-flex justify-content-center" th:action="@{/phones/del/{id} (id=${phone.id})}">
+                    <button type="submit" class="btn btn-danger" onclick="return confirmation()">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <form action="/managers" method="get">
+        <button type="submit" class="btn btn-secondary" accesskey="x">Back</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/phone-searcher.js}"></script>
+</body>
+</html>
